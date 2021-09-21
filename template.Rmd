@@ -1,0 +1,72 @@
+---
+title: "Simple document"
+author: "JZ"
+date: 9/16/2021
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    code_folding: hide
+---
+
+```{r}
+library(tidyverse)
+```
+
+I'm an R Markdown document!
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
+
+# Section 3
+
+Let's write a new code chunk.
+
+```{r echo = FALSE}
+
+set.seed(1)
+
+plot_df = tibble(
+  x = rnorm(1000, sd = .5),
+  y = 1 + 2 * x + rnorm(1000)
+)
+
+ggplot(plot_df, aes(x = x)) + geom_histogram()
+```
+
+# Section 4
+
+Learning assessment
+
+```{r assesment}
+set.seed(1)
+
+try = tibble(
+  a = rnorm(500, mean = 1),
+  b = a > 0,
+  c = abs(a)
+)
+
+ggplot(try, aes(x = c)) + geom_histogram()
+
+```
+
+name the chunk by: r name
+
+r, echo/eval/collapse/message = TRUE/FALSE etc
+
+when you click knit, r will restart automatically
+
+rmarkdown::render(input = "name.RMD", output_format = "html_document", output_file = "results/name.html")
